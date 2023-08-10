@@ -1,0 +1,43 @@
+.login-register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-register-form {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-register-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .login-register-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .login-register-form label {
+    font-weight: bold;
+  }
+  
+  .login-register-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .login-register-form .btn-primary {
+    width: 100%;
+  }
+  
+  .login-register-form .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
