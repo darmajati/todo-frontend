@@ -5,7 +5,7 @@ export const addTodo = (todoData) => async (dispatch, getState) => {
   try {
     const token = localStorage.getItem('token');
     const response = await axios.post(
-      'http://localhost:8000/todo/api/create',
+      'https://healthy-blue-outerwear.cyclic.app/todo/api/create',
       todoData,
       {
         headers: {
@@ -23,7 +23,7 @@ export const editTodo = (id, updatedData) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
     const response = await axios.patch(
-      `http://localhost:8000/todo/api/update/${id}`,
+      `https://healthy-blue-outerwear.cyclic.app/todo/api/update/${id}`,
       updatedData,
       {
         headers: {
@@ -47,7 +47,7 @@ export const toggleTodo = (id) => async (dispatch, getState) => {
 
     console.log("Updating todo:", updatedTodo);
     
-    await axios.patch(`http://localhost:8000/todo/api/update/${id}`, updatedTodo, {
+    await axios.patch(`https://healthy-blue-outerwear.cyclic.app/todo/api/update/${id}`, updatedTodo, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -62,7 +62,7 @@ export const toggleTodo = (id) => async (dispatch, getState) => {
 export const deleteTodo = (id) => async (dispatch, getState) => {
   try {
     const token = localStorage.getItem('token');
-    await axios.delete(`http://localhost:8000/todo/api/delete/${id}`, {
+    await axios.delete(`https://healthy-blue-outerwear.cyclic.app/todo/api/delete/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -76,7 +76,7 @@ export const deleteTodo = (id) => async (dispatch, getState) => {
 export const fetchTodos = () => async (dispatch, getState) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await axios.get('http://localhost:8000/todo/api/get', {
+    const response = await axios.get('https://healthy-blue-outerwear.cyclic.app/todo/api/get', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
