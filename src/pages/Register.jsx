@@ -16,7 +16,7 @@ const Register = () => {
       return;
     }
     axios
-      .post("https://healthy-blue-outerwear.cyclic.app/auth/api/register", { pin })
+      .post("https://careful-shift-cod.cyclic.app/auth/api/register", { pin })
       .then((response) => {
         // Handle successful registration (if needed)
         setError("");

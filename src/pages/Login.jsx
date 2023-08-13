@@ -16,7 +16,7 @@ const Login = () => {
       return;
     }
     axios
-      .post("https://healthy-blue-outerwear.cyclic.app/auth/api/login", { pin })
+      .post("https://careful-shift-cod.cyclic.app/auth/api/login", { pin })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.id);

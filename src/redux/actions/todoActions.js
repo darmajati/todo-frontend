@@ -5,7 +5,7 @@ export const addTodo = (todoData) => async (dispatch, getState) => {
   try {
     const token = localStorage.getItem('token');
     const response = await axios.post(
-      'https://healthy-blue-outerwear.cyclic.app/todo/api/create',
+      'https://careful-shift-cod.cyclic.app/todo/api/create',
       todoData,
       {
         headers: {
@@ -23,7 +23,7 @@ export const editTodo = (id, updatedData) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
     const response = await axios.patch(
-      `https://healthy-blue-outerwear.cyclic.app/todo/api/update/${id}`,
+      `https://careful-shift-cod.cyclic.app/todo/api/update/${id}`,
       updatedData,
       {
         headers: {
@@ -47,7 +47,7 @@ export const toggleTodo = (id) => async (dispatch, getState) => {
 
     console.log("Updating todo:", updatedTodo);
     
-    await axios.patch(`https://healthy-blue-outerwear.cyclic.app/todo/api/update/${id}`, updatedTodo, {
+    await axios.patch(`https://careful-shift-cod.cyclic.app/todo/api/update/${id}`, updatedTodo, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -62,7 +62,7 @@ export const toggleTodo = (id) => async (dispatch, getState) => {
 export const deleteTodo = (id) => async (dispatch, getState) => {
   try {
     const token = localStorage.getItem('token');
-    await axios.delete(`https://healthy-blue-outerwear.cyclic.app/todo/api/delete/${id}`, {
+    await axios.delete(`https://careful-shift-cod.cyclic.app/todo/api/delete/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -76,7 +76,7 @@ export const deleteTodo = (id) => async (dispatch, getState) => {
 export const fetchTodos = () => async (dispatch, getState) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await axios.get('https://healthy-blue-outerwear.cyclic.app/todo/api/get', {
+    const response = await axios.get('https://careful-shift-cod.cyclic.app/todo/api/get', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
