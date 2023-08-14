@@ -1,0 +1,14 @@
+1. Apakah Kegunaan JSON pada REST API?
+JSON (JavaScript Object Notation) adalah format file berbasis teks yang umumnya digunakan dalam proses pertukaran data antara server dan klien. File JSON memiliki ekstensi .json serta menggunakan teks yang sama-sama bisa dibaca oleh manusia dan dipahami oleh komputer.
+sumber: https://www.hostinger.co.id/tutorial/apa-itu-json
+
+
+2. Jelaskan bagaimana REST API bekerja
+RESTful (Representational State Transfer) adalah salah
+satu jenis dari API atau yang menggambarkan bentuk
+dari API itu seperti apa. REST adalah kumpulan aturan
+yang diikuti oleh developer untuk membuat API.
+
+RESTful API bekerja dengan cara memanipulasi resource dan representasi. Representasi ini saling dipertukarkan di antara pengguna dan server melalui antarmuka terstandar dan protokol komunikasi tertentu, biasanya HTTP. 
+Jadi, saat pengguna ingin menggunakan fungsi suatu aplikasi, perangkatnya akan mengirimkan permintaan melalui HTTP ke server. Server akan mencari resource dan mengomunikasikan representasi state sebagai respons kepada pengguna melalui protokol yang sama. Representasi ini bisa dibuat dalam berbagai format, seperti JSON atau XML.
+sumber: Slideshow Binar Academy, https://www.hostinger.co.id/tutorial/apa-itu-json
