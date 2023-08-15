@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import TodoItem from "../components/TodoItem";
+import TodoItem from "./TodoItem";
 import { fetchTodos } from "../redux/actions/todoActions";
 import { Table, Container, Button } from "react-bootstrap";
 import { deleteTodo } from "../redux/actions/todoActions";
-import AddTodo from "../components/AddTodo";
+import AddTodo from "./AddTodo";
 import { Link } from "react-router-dom"
 
 const TodoList = () => {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import TodoList from "../components/TodoList"
 
 const Home = () => {
   const userId = localStorage.getItem("userId");
@@ -15,6 +16,7 @@ const Home = () => {
   };
 
   return (
+    <>
     <div style={{ textAlign: "center" }}>
       <h2 style={{ margin: "20px 0" }}>Welcome to the Home Page</h2>
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -29,11 +31,9 @@ const Home = () => {
           </Card.Body>
         </Card>
       </div>
-
-      <h3 className="mt-4">
-        <Link to="/todo">Klik disini untuk akses todo list</Link>
-      </h3>
     </div>
+    <TodoList />
+    </>
   );
 };
 
