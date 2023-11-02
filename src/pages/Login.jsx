@@ -3,18 +3,22 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BeatLoader } from "react-spinners";
 import "../css/login-register.css";
 
 const Login = () => {
   const [pin, setPin] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = () => {
     if (pin.length !== 4) {
-      setError("Invalid pin. Please try again.");
+      setError("Pin harus memiliki 4 karakter.");
       return;
     }
+    setIsLoading(true);
+
     axios
       .post("https://careful-shift-cod.cyclic.app/auth/api/login", { pin })
       .then((response) => {
@@ -22,10 +26,13 @@ const Login = () => {
         localStorage.setItem("userId", response.data.id);
         localStorage.setItem("userPin", pin);
         setError("");
-        navigate("/");
+        setIsLoading(false);
+        navigate("/")
+        ;
       })
       .catch((error) => {
         setError("Invalid pin. Please try again.");
+        setIsLoading(false);
       });
   };
 
@@ -49,14 +56,16 @@ const Login = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" onClick={handleLogin}>
-          Sign In
+        <Button variant="primary" onClick={handleLogin} disabled={isLoading}>
+        {isLoading ? (
+                  <BeatLoader color="#ffffff" />
+                ) : (
+                   "Sign In"
+                  )}
         </Button>
         <p className="mt-2">
-          <Link to="/register">Register</Link>
-        </p>
-        <p>
-          <Link to="/">Kembali ke Beranda</Link>
+          Belum punya akun?
+          <Link to="/register"> Register</Link>
         </p>
       </Form>
     </div>

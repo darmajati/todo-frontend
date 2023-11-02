@@ -3,18 +3,27 @@ import { useDispatch } from "react-redux";
 import { addTodo } from "../redux/actions/todoActions";
 import { Form, Button } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { PulseLoader } from "react-spinners";
 
 const AddTodoForm = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (title.trim() !== "") {
-      dispatch(addTodo({ title, description }));
-      setTitle("");
-      setDescription("");
+      setIsLoading(true);
+      try {
+        await dispatch(addTodo({ title, description }));
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setIsLoading(false);
+        setTitle("");
+        setDescription("");
+      }
     }
   };
 
@@ -28,8 +37,14 @@ const AddTodoForm = () => {
           <Form.Label>Deskripsi</Form.Label>
           <Form.Control type="text" placeholder="Tambahkan Deskripsi" value={description} onChange={(e) => setDescription(e.target.value)} />
         </Form.Group>
-        <Button variant="success" type="submit">
-          Tambah Todo <AiOutlinePlusCircle />
+        <Button variant="success" type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <PulseLoader color="#36d7b7" />
+          ) : (
+            <>
+              Tambah Todo <AiOutlinePlusCircle />
+            </>
+          )}
         </Button>
       </Form>
     </>
