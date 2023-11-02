@@ -5,16 +5,27 @@ import { toggleTodo } from "../redux/actions/todoActions";
 import { editTodo } from "../redux/actions/todoActions";
 import { MdOutlineModeEditOutline } from "react-icons/md";
 import { BsFillTrashFill, BsCheckCircle } from "react-icons/bs";
-import { MdPendingActions } from "react-icons/md"
+import { MdPendingActions } from "react-icons/md";
+import { ClockLoader, PulseLoader } from "react-spinners";
 
 const TodoItem = ({ todo, onDelete, index }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [editedTitle, setEditedTitle] = useState(todo.title);
   const [editedDescription, setEditedDescription] = useState(todo.description);
+  const [isLoadingStatus, setIsLoadingStatus] = useState(false);
+  const [isLoadingEdit, setIsLoadingEdit] = useState(false);
 
   const handleToggleStatus = () => {
-    dispatch(toggleTodo(todo.id));
+    setIsLoadingStatus(true);
+    dispatch(toggleTodo(todo.id))
+      .then(() => {
+        setIsLoadingStatus(false);
+      })
+      .catch((error) => {
+        console.error("Error toggling status:", error);
+        setIsLoadingStatus(false);
+      });
   };
 
   const handleEdit = () => {
@@ -26,9 +37,17 @@ const TodoItem = ({ todo, onDelete, index }) => {
   };
 
   const handleSaveEdit = () => {
+    setIsLoadingEdit(true);
     const updatedData = { title: editedTitle, description: editedDescription };
-    dispatch(editTodo(todo.id, updatedData));
-    setShowModal(false);
+    dispatch(editTodo(todo.id, updatedData))
+      .then(() => {
+        setIsLoadingEdit(false); // Matikan loading setelah selesai menyimpan
+        setShowModal(false);
+      })
+      .catch((error) => {
+        console.error("Error saving edit:", error);
+        setIsLoadingEdit(false);
+      });
   };
 
   return (
@@ -37,16 +56,16 @@ const TodoItem = ({ todo, onDelete, index }) => {
       <td>{todo.title}</td>
       <td>{todo.description}</td>
       <td>
-      {todo.status ? (
-        <Button variant="success" onClick={handleToggleStatus}>
-          <BsCheckCircle/>
-        </Button>
-      ) : (
-        <Button variant="warning" onClick={handleToggleStatus}>
-          <MdPendingActions />
-        </Button>
-      )}
-    </td>
+        {todo.status ? (
+          <Button variant="success" onClick={handleToggleStatus} disabled={isLoadingStatus}>
+            {isLoadingStatus ? <ClockLoader color="#ffffff" size={20} /> : <BsCheckCircle />}
+          </Button>
+        ) : (
+          <Button variant="warning" onClick={handleToggleStatus} disabled={isLoadingStatus}>
+            {isLoadingStatus ? <ClockLoader color="#000000" size={20} /> : <MdPendingActions />}
+          </Button>
+        )}
+      </td>
       <td>
         <Button variant="warning" onClick={handleEdit}>
           <MdOutlineModeEditOutline />
@@ -76,8 +95,13 @@ const TodoItem = ({ todo, onDelete, index }) => {
           <Button variant="secondary" onClick={handleCloseModal}>
             Batal
           </Button>
-          <Button variant="primary" onClick={handleSaveEdit}>
-            Simpan Perubahan
+
+          <Button variant="primary" onClick={handleSaveEdit} disabled={isLoadingEdit}>
+            {isLoadingEdit ? ( // Tampilkan loading saat proses edit
+              <PulseLoader color="#ffffff" />
+            ) : (
+              "Simpan Perubahan"
+            )}
           </Button>
         </Modal.Footer>
       </Modal>

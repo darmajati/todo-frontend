@@ -21,8 +21,16 @@ const TodoList = () => {
   }, [dispatch]);
 
   const handleDelete = async (id) => {
-    await dispatch(deleteTodo(id));
-    dispatch(fetchTodos());
+    try {
+      // Set isLoading to true when the delete process starts
+      setIsLoading(true);
+      await dispatch(deleteTodo(id));
+      // After successful deletion, fetch todos again and set isLoading to false
+      await dispatch(fetchTodos());
+    } finally {
+      // Ensure isLoading is set to false even if there is an error
+      setIsLoading(false);
+    }
   };
 
   return (
